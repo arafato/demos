@@ -30,6 +30,9 @@
     <section id="todoapp">
       <button style="margin-left:50px;" data-bind="click: login"> Login
       </button>
+      <h1 style="margin-left:50px;" data-bind="visible: authenticated">Welcome,
+	<span data-bind="text: name"></span>
+      </h1>
     
       <header id="header">
 	<div id="headerBand"></div>

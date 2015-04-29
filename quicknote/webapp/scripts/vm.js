@@ -12,8 +12,8 @@ function vm(items) {
     
     self.todos = ko.observableArray(items);
     self.authenticated = ko.observable(false);
+    self.name = ko.observable("");
 
-    
     self.addItem = function() {
 	self.todos.push(new item("", "write here..."));
     };
@@ -45,6 +45,10 @@ function vm(items) {
 		AWS.config.update({
 		    region: Config.region,
 		    credentials: creds
+		});
+
+		FB.api('/me', function(response) {
+		    self.name(response.name);
 		});
 			
 		self.authenticated(true);
