@@ -6,12 +6,12 @@
 	loadItems: function() {
 
 	    var items = [];
-	    items.push(new item("Test1"));
+	    items.push(new item("", "write here"));
 
 	    return items;
 	}
     };
     
     var items = app.loadItems();
-    ko.applyBindings(new todoList(items));
+    ko.applyBindings(new vm(items));
 })();

@@ -8,8 +8,29 @@
     <link href="css/index.css" rel="stylesheet" />
   </head>
   <body>
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId      : '824002991019457',
+      xfbml      : true,
+      version    : 'v2.3'
+      });
+      };
+      
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    
     <section id="todoapp">
-      <h1 style="margin-left:50px;">Login</h1>
+      <button style="margin-left:50px;" data-bind="click: login"> Login
+      </button>
+    
       <header id="header">
 	<div id="headerBand"></div>
 	<input id="new-todo" placeholder="What needs to be done?" autofocus>
@@ -28,6 +49,8 @@
       </section>
     </section>
 
+    <script type="text/javascript" src="scripts/aws-sdk.js"></script>
+    <script type="text/javascript" src="scripts/config.js"></script>
     <script type="text/javascript" src="scripts/knockout-3.1.0.js"></script>
     <script type="text/javascript" src="scripts/vm.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
