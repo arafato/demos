@@ -30,6 +30,8 @@
     <section id="todoapp">
       <button style="margin-left:50px;" data-bind="click: login"> Login
       </button>
+      <button style="margin-left:50px;" data-bind="click: sync"> Synchronize
+      </button>
       <h1 style="margin-left:50px;" data-bind="visible: authenticated">Welcome,
 	<span data-bind="text: name"></span>
       </h1>
@@ -53,6 +55,7 @@
     </section>
 
     <script type="text/javascript" src="scripts/aws-sdk.js"></script>
+    <script type="text/javascript" src="scripts/cognito-sync.js"></script>
     <script type="text/javascript" src="scripts/config.js"></script>
     <script type="text/javascript" src="scripts/knockout-3.1.0.js"></script>
     <script type="text/javascript" src="scripts/vm.js"></script>
