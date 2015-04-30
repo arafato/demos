@@ -36,9 +36,9 @@ function vm(items) {
 
     self.sync = function() {
 	
-	self.syncClient.openOrCreateDataset("QuickNote", function(err, dataset) {
+	self.syncClient.openOrCreateDataset(Config.dataset, function(err, dataset) {
 	    
-	    dataset.put("MyKey", ko.toJSON(self.todos), function(err, record) {
+	    dataset.put(Config.datasetKey, ko.toJSON(self.todos), function(err, record) {
 		if ( !err ) {
 		    dataset.synchronize({
 			onSuccess: function(dataset, newRecords) {
@@ -55,15 +55,14 @@ function vm(items) {
 			    for (var i=0; i < conflicts.length; i++) {
 				
 				// Take remote version.
-				// resolved.push(conflicts[i].resolveWithRemoteRecord());
+				resolved.push(conflicts[i].resolveWithRemoteRecord());
 				
 				// Or... take local version.
-				resolved.push(conflicts[i].resolveWithLocalRecord());
+				// resolved.push(conflicts[i].resolveWithLocalRecord());
 				
 				// Or... use custom logic.
 				// var newValue = conflicts[i].getRemoteRecord().getValue() + conflicts[i].getLocalRecord().getValue();
-				
-//				resolved.push(conflicts[i].resolveWithValue(newValue));
+				// resolved.push(conflicts[i].resolveWithValue(newValue));
 			    }
 			    
 			    dataset.resolve(resolved, function(err) {
@@ -107,8 +106,24 @@ function vm(items) {
 		
 		AWS.config.credentials.get(function() {
 		    self.syncClient = new AWS.CognitoSyncManager();
+		    
+		    self.syncClient.openOrCreateDataset(Config.dataset, function(err, dataset) {
+			
+			dataset.get(Config.datasetKey, function(err, value) {
+
+			    if (value === undefined) {
+				return;
+			    }
+			    value = JSON.parse(value);
+			    var arrayLength = value.length;
+			    for (var i = 0; i < arrayLength; i++) {
+				var todo = new item(value[i].text, value[i].placeholder);
+				self.todos.push(todo);
+			    }
+			});
+		    });
 		});
-	    
+		
 		FB.api('/me', function(response) {
 		    self.name(response.name);
 		});

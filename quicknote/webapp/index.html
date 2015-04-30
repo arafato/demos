@@ -30,7 +30,7 @@
     <section id="todoapp">
       <button style="margin-left:50px;" data-bind="click: login"> Login
       </button>
-      <button style="margin-left:50px;" data-bind="click: sync"> Synchronize
+      <button data-bind="visible: authenticated, click: sync"  style="margin-left:50px;"> Synchronize
       </button>
       <h1 style="margin-left:50px;" data-bind="visible: authenticated">Welcome,
 	<span data-bind="text: name"></span>
